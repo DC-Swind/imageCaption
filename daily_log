@@ -1,0 +1,36 @@
+[1]  ./log_st  setting0  lr4e-4, topdown residual  [~6ep, 5.53734 rank 34]  [16ep, 5.65957 rank 26]
+[2]  ./log_st/setting1  lr4e-4, topdown  [18ep, 5.68262 rank 23]
+
+[1]  ./log_st/setting2  lr4e-4, topdown, input without relu, dropout tune, dropinput 0.3  [worse than setting1]
+[2]  ./log_st/setting3  lr4e-4, residual, other same as setting2
+----[3]  ./log_st/setting4  lr1e-3, topdown, other same as setting2  [validation loss is bigger than setting2, Guess small lr is better]
+----[4]  ./log_st/setting5  lr4e-2, topdown, lr decay every epoch, other same as setting2  [lr is too big]
+----[4]  ./log_st/setting5  lr4e-3, topdown,  lr decay every epoch, other same as setting2  [lr is too big]
+[4]  ./log_st/setting5  lr4e-4, topdown, v^bar to v^hat. other same as setting2  [better than setting0]
+[5]  ./log_st/setting6  lr4e-4, topdown, rearrange just layer1, other same as setting2  [worse than setting0]
+[6]  ./log_st/setting7  lr4e-4, topdown, restore setting2
+[3]  ./log_st/setting8  lr2e-4, topdown, other same as setting2  [convergence too slow]
+
+[1]  ./log_st/setting9  lr4e-4, topdown, input without relu, old dropout, dropinput 0.3, v^bar to v^hat, rearrange just layer1
+[2]  ./log_st/setting10 lr4e-4, topdown, input without relu, old dropout, dropinput 0.3, v^bar to v^hat, rearrange 3
+[3]  ./log_st/setting11 lr4e-4, topdown, pretrained embedding, other same as setting10
+[4]  ./log_st/setting12 lr4e-4, topdown, dropout h_att vertical, other same as setting10
+[5]  ./log_st/setting13 lr4e-4, topdown, bilinear att score function, other same as setting10  [loss is big]
+[1]  ./log_st/setting14 lr4e-4, topdown, restore setting13, drop h_att vertical
+2  ./log_st/setting15 lr4e-4, topdown, 40eps, pretrained embedding, drop h_att vertical, cuda
+
+current result
+setting11 > setting1 > setting10 > setting9 > setting12 > setting7 > setting5 > setting0 > setting2 > setting3 > setting6
+
+validation loss
+setting0  1.247 rearrange layer1  dc.swind
+setting1  1.246 rearrange layer1  2012iridescent
+setting2  1.256                   1209681393 Peknvf
+setting3  1.255                   jiangqy
+setting5  1.252                   jutou
+setting6  1.254 rearrange layer1  jiangqy
+setting7  1.250                   jiangqy
+setting9  1.243 rearrange layer1  1209681393 Peknvf
+setting10 1.246                   1209681393 Peknvf
+setting11 1.243 pretrain          2012iridescent
+setting12 1.239                   2012iridescent
